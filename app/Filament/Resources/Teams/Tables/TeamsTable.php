@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
 
 class TeamsTable
@@ -18,11 +19,9 @@ class TeamsTable
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('user.name')
-                    ->sortable(),
-                TextColumn::make('pokemon_count')
-                    ->counts('pokemon')
-                    ->label('Pokémon'),
+                ViewColumn::make('pokemon')
+                    ->view('filament.tables.columns.team-pokemon')
+                    ->label('Team'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -33,7 +32,8 @@ class TeamsTable
             ])
             ->recordActions([
                 ViewAction::make(),
-                EditAction::make(),
+                EditAction::make()
+                    ->url(fn ($record) => route('filament.admin.pages.team-builder', ['team' => $record->id])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

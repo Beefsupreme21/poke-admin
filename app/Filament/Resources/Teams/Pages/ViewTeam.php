@@ -13,7 +13,18 @@ class ViewTeam extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
+            EditAction::make()
+                ->url(fn () => route('filament.admin.pages.team-builder', ['team' => $this->record->id])),
         ];
+    }
+    
+    public function getTitle(): string
+    {
+        return $this->record->name;
+    }
+    
+    public function getBreadcrumbs(): array
+    {
+        return [];
     }
 }

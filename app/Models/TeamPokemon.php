@@ -12,4 +12,9 @@ class TeamPokemon extends Model
     {
         return $this->belongsTo(Team::class);
     }
+    
+    public function pokemon()
+    {
+        return $this->belongsTo(Pokemon::class);
+    }
 }

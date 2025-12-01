@@ -52,7 +52,6 @@ class TeamResource extends Resource
             'index' => ListTeams::route('/'),
             'create' => CreateTeam::route('/create'),
             'view' => ViewTeam::route('/{record}'),
-            'edit' => EditTeam::route('/{record}/edit'),
         ];
     }
 }
